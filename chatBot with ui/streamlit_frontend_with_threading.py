@@ -52,7 +52,7 @@ def rename_chat(thread_id,name: str):
 
     # Prevent duplicate conversation names
     for existing_id, existing_name in st.session_state["thread_id_to_name"].items():
-        if existing_id != thread_id and str(existing_name) == new_name:
+        if existing_id != thread_id and str(existing_name) == name:
             st.warning("A chat with this name already exists.")
             return False
     
@@ -66,13 +66,13 @@ def rename_chat(thread_id,name: str):
     # update the list of chat_names
     if old_name in st.session_state["chat_names"]:
         index = st.session_state["chat_names"].index(old_name)
-        st.session_state["chat_names"][index] = new_name
+        st.session_state["chat_names"][index] = name
     else:
-        st.session_state["chat_names"].append(new_name)
+        st.session_state["chat_names"].append(name)
 
     # update the current chat name 
     if st.session_state["thread_id"] == thread_id:
-        st.session_state["chat_name"] = new_name
+        st.session_state["chat_name"] = name
 
         return True
 
